@@ -12,9 +12,9 @@ void gps_coordenadas(GPSData *data){
       data->longitud = fix.longitude();
 
       /*
-      Serial.print("data->Latitud: ");
+      Serial.print("Latitud recibida: ");
       Serial.println(data->latitud, 6);
-      Serial.print("data->Longitud: ");
+      Serial.print("Longitud recibida: ");
       Serial.println(data->longitud, 6);
       */
     }
@@ -27,9 +27,10 @@ void gps_velocidad(GPSData *data){
     
     if (fix.valid.speed) {
       data->velocidad = fix.speed_kph();
+      
       /*
-      Serial.print("Velocidad (km/h): ");
-      Serial.println(data->velocidad, 2); 
+      Serial.print("Velocidad recibida (km/h): ");
+      Serial.println(data->velocidad, 2);
       */
     }
   }

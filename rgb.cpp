@@ -32,3 +32,16 @@ void rgb_test(){
   rgb_cambiar_color(apagado);
   delay(1000);
 }
+
+void rgb_color_velocidad(float velocidad){
+  if(velocidad < 10)
+    rgb_cambiar_color(verde);
+  else if(velocidad < 30)
+    rgb_cambiar_color(azul);
+  else if(velocidad < 60)
+    rgb_cambiar_color(amarillo);
+  else if(velocidad < 80)
+    rgb_cambiar_color(naranja);
+  else
+   rgb_cambiar_color(rojo);
+}

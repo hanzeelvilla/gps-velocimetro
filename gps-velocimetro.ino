@@ -3,29 +3,37 @@
 #include "gps.h"
 
 GPSData gpsData;
+bool gpsListo = false;  // Variable para controlar si el GPS está listo
 
 void setup() {
   lcd_inicializar();
   rgb_inicializar();
-
-  lcd_imprimir("Hanzeel guapo", 0, 0);
 
   Serial.begin(115200);
   gpsSerial.begin(9600);
 }
 
 void loop() {
-  //rgb_test();
-  gps_coordenadas(&gpsData);
   gps_velocidad(&gpsData);
 
-  // Acceder a los datos actualizados
-  Serial.print("Latitud: ");
-  Serial.println(gpsData.latitud, 6);
+  if(gpsData.velocidad != 0){
+    if (!gpsListo) {
+      lcd.clear();
+      gpsListo = true;
+    }
 
-  Serial.print("Longitud: ");
-  Serial.println(gpsData.longitud, 6);
+    char velocidad_str[10];
+    dtostrf(gpsData.velocidad, 4, 2, velocidad_str);
 
-  Serial.print("Velocidad (km/h): ");
-  Serial.println(gpsData.velocidad, 2);
+    lcd_imprimir("Vel en Km/h: ", 0, 0);
+    lcd_imprimir(velocidad_str, 0, 1);
+    rgb_color_velocidad(gpsData.velocidad); 
+  }
+  else{
+    if (gpsListo) {
+      lcd.clear();
+      gpsListo = false;
+    }
+    lcd_imprimir("Esperando GPS", 0, 0);
+  }
 }

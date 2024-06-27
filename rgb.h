@@ -15,6 +15,6 @@
 void rgb_inicializar();
 void rgb_cambiar_color(int r, int g, int b);
 void rgb_test();
-//void rgb_color_velocidad(int velocidad);
+void rgb_color_velocidad(float velocidad);
 
 #endif
